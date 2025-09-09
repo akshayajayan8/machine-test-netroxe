@@ -8,7 +8,13 @@ export default function CustomerForm() {
     const [customerData, setCustomerData] = useState<Customer>(initialValuesCustomer);
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setCustomerData(prev => ({ ...prev, [name]: value }))
+        if (name === "billAmount") {
+            setCustomerData(prev => ({ ...prev,billAmount: parseInt(value),balanceAmount:parseInt(value) }))
+        }
+        else {
+              setCustomerData(prev => ({ ...prev, [name]: value }))
+        }
+      
     }
 
     const handleSubmit = (e: FormEvent) => {
@@ -17,19 +23,19 @@ export default function CustomerForm() {
             validateCustomerData(customerData)
             saveCustomerData(customerData);
         }
-        catch(err:any){
+        catch (err: any) {
             alert(err.message)
         }
-       
+
     }
     return <form onSubmit={handleSubmit}>
         <h1>Customer Form</h1>
         <label>Customer Name:</label>
-        <input type="text" name="name" onChange={handleChange} /><br/>
+        <input type="text" name="name" onChange={handleChange} /><br />
         <label>Bill No</label>
-        <input type="text" name="billNo" onChange={handleChange} /><br/>
-           <label>Bill Amount</label>
-        <input type="text" name="billAmount" onChange={handleChange} /><br/>
+        <input type="text" name="billNo" onChange={handleChange} /><br />
+        <label>Bill Amount</label>
+        <input type="text" name="billAmount" onChange={handleChange} /><br />
         <button type="submit">
             Submit
         </button>

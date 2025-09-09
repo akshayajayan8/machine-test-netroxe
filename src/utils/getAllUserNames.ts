@@ -9,5 +9,7 @@ export default function getAllUserName(){
         userNames[element.name]=element.name
     });
 
+    return Object.values(userNames)
+
 
 }

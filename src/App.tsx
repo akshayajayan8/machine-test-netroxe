@@ -6,19 +6,28 @@ import type { Customer } from './types/Customer'
 import { Route, Router, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import { Payments } from './components/Payment'
+import { PAGES } from './constants/generic'
 
 function App() {
-  const [data, setData] = useState<Record<string, Customer> | null>(null);
-  function fetchData() {
-    const data = getAllCustomerData();
-    setData(data);
-  }
-  useEffect(() => {
-    fetchData();
-  }, [])
-    return<>
-    <Home/>
-    <Payments/>
-    </>
+  const [currentPage, setCurrentPage] = useState(PAGES.bills)
+  return <>
+    <div>
+
+      <button onClick={() => setCurrentPage(PAGES.bills)}>
+        Enter Bills
+      </button>
+      <button onClick={() => setCurrentPage(PAGES.payments)}>
+        Enter Payments
+      </button>
+      {
+        currentPage === PAGES.bills ?
+          <Home />
+          :
+          <Payments />
+      }
+    </div>
+
+
+  </>
 }
-    export default App;
+export default App;
